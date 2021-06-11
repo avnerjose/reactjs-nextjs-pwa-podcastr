@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 0 1rem;
+  padding: 0 1rem 2rem;
   height: calc(100vh - 6.5rem);
   overflow-y: scroll;
   h2 {
@@ -14,8 +14,7 @@ export const Container = styled.div`
       position: absolute;
       width: 100vw;
       top: calc(6.5rem + 12rem);
-      padding: 0 1rem;
-
+      overflow-y: inherit;
       h2 {
         margin-top: 1rem;
         margin-bottom: 1rem;

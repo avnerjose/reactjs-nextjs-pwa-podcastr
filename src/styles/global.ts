@@ -1,3 +1,7 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyles = createGlobalStyle`
+
 :root {
   --white: #fff;
 
@@ -28,7 +32,7 @@ main {
 body {
   height: 100%;
   width: 100%;
-  background-color: var(--gray-50);
+  background-color: ${(p) => p.theme.colors.background};
 }
 
 html {
@@ -44,12 +48,14 @@ button {
   color: var(--gray-500);
 }
 
-@for $i from 1 through 5 {
-  h#{$i} {
-    font-size: 600;
-    font-family: Lexend, sans-serif;
-    color: var(--gray-800);
-  }
+h1,
+h2,
+h3,
+h4,
+h5{
+  font-size: 600;
+  font-family: Lexend, sans-serif;
+  color: ${({ theme }) => theme.colors.heading};
 }
 
 h1 {
@@ -75,3 +81,6 @@ button {
     font-size: 87.5%;
   }
 }
+
+
+`;

@@ -15,7 +15,7 @@ export const Container = styled.tr`
     }
 
     a {
-      color: var(--gray-800);
+      color: ${({ theme }) => theme.colors.heading};
       font-family: Lexend, sans-serif;
       font-weight: 600;
       text-decoration: none;

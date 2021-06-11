@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 0 1rem;
-  overflow-y: scroll;
+  padding: 1rem 1rem;
+  overflow-y: inherit;
   height: calc(100vh - 6.5rem);
 
   header {
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--gray-100);
-
+    color: ${({ theme }) => theme.colors.text};
     h1 {
       margin-top: 2rem;
       margin-bottom: 1.5rem;
@@ -41,7 +41,7 @@ export const Container = styled.div`
     & {
       position: absolute;
       top: calc(6.5rem + 12rem);
-      overflow-y: hidden;
+      
       header {
         h1 {
           font-size: 1.5rem;
@@ -98,7 +98,7 @@ export const ThumbnailContainer = styled.div`
 export const Description = styled.div`
   margin-top: 2rem;
   line-height: 1.675rem;
-  color: var(--gray-800);
+  color: ${({ theme }) => theme.colors.text};
 
   p {
     margin: 1.5rem 0;

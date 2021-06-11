@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-  background: var(--white);
+  background: ${({ theme }) => theme.colors.itemBackground};
   height: 6.5rem;
   display: flex;
   align-items: center;
   padding: 2rem 4rem;
-  border-bottom: 1px solid var(--gray-100);
-
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.05);
+  color: ${({ theme }) => theme.colors.text};
+  
   img {
     cursor: pointer;
   }
@@ -18,7 +19,7 @@ export const Container = styled.header`
     border-left: 1px solid var(--gray-100);
   }
 
-  span {
+  .switch {
     margin-left: auto;
     text-transform: capitalize;
   }

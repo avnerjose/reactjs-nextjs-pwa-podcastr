@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.li`
-  background: var(--white);
-  border: 1px solid var(--gray-100);
+  background: ${({ theme }) => theme.colors.itemBackground};
   padding: 1.25rem;
   border-radius: 1.5rem;
   position: relative;
   display: flex;
   align-items: center;
+  box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.2);
 
   img {
     width: 6rem;
@@ -51,7 +51,7 @@ export const EpisodeDetails = styled.div`
 
   a {
     display: block;
-    color: var(--gray-800);
+    color: ${({ theme }) => theme.colors.heading};
     font-family: Lexend, sans-serif;
     font-weight: 600;
     text-decoration: none;

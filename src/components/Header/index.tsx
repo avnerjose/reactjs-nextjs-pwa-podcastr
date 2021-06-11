@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
-import format from "date-fns/format";
-import ptBr from "date-fns/locale/pt-BR";
+import { FaSun, FaMoon } from "react-icons/fa";
 import Link from "next/link";
-import styles from "./styles.module.scss";
+import { useThemeContext } from "../../contexts/ThemeContext";
+import Switch from "react-switch";
 import { Container } from "./styles";
+import { useTheme } from "styled-components";
 
 export function Header() {
-  const currentDate = format(new Date(), "EEEEEE, d MMM", {
-    locale: ptBr,
-  });
-
   const [mobile, setMobile] = useState(true);
+  const { toggleTheme } = useThemeContext();
+  const { title, colors } = useTheme();
+  const [switchChecked, setSwitchChecked] = useState(true);
+
+  const toggleSwitch = () => {
+    setSwitchChecked(!switchChecked);
+    toggleTheme();
+  };
 
   const checkMobile = () => {
     if (window.innerWidth <= 720) {
@@ -21,6 +26,10 @@ export function Header() {
   };
 
   useEffect(() => {
+    setSwitchChecked(title === "light" ? true : false);
+  }, [title]);
+
+  useEffect(() => {
     checkMobile();
   }, []);
 
@@ -29,14 +38,52 @@ export function Header() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
+  const logo = title === "light" ? "logo" : "logoWhite";
+
   return (
     <Container>
       <Link href="/">
-        <img src="/logo.svg" alt="Logo" />
+        <img src={`/${logo}.svg`} alt="Logo" />
       </Link>
-      <p>O melhor para você ouvir sempre</p>
-
-      {!mobile && <span>{currentDate}</span>}
+      {!mobile && <p>O melhor para você ouvir sempre</p>}
+      <div className="switch">
+        <Switch
+          checked={switchChecked}
+          onChange={toggleSwitch}
+          onColor={colors.switch}
+          offColor={colors.switch}
+          checkedIcon={
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FaSun color="yellow" />
+            </div>
+          }
+          uncheckedIcon={
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FaMoon color="yellow" />
+            </div>
+          }
+        />
+      </div>
     </Container>
   );
 }

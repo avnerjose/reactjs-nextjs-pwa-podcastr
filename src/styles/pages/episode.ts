@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   padding: 1rem 1rem;
-  overflow-y: inherit;
+  overflow-y: scroll;
   height: calc(100vh - 6.5rem);
 
   header {
@@ -41,7 +41,7 @@ export const Container = styled.div`
     & {
       position: absolute;
       top: calc(6.5rem + 12rem);
-      
+      overflow-y: inherit;
       header {
         h1 {
           font-size: 1.5rem;

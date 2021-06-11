@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  padding: 0 1rem 2rem;
+  padding: 0 1rem 2rem 1rem;
   height: calc(100vh - 6.5rem);
   overflow-y: scroll;
   h2 {

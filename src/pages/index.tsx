@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import format from "date-fns/format";
@@ -6,7 +7,7 @@ import { api } from "../services/api";
 import { convertDurationToTimeString } from "../utils/convertDurationToTimeString";
 import { LatestEpisodeItem } from "../components/LatestEpisodeItem";
 import { EpisodeItem } from "../components/EpisodeItem";
-import styles from "./styles/home.module.scss";
+import { Container, LatestEpisodes, AllEpisodes } from "../styles/pages/home";
 
 interface Episode {
   id: string;
@@ -27,13 +28,31 @@ interface HomeProps {
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
   const episodeList = [...latestEpisodes, ...allEpisodes];
+  const [mobile, setMobile] = useState(true);
+
+  const checkMobile = () => {
+    if (window.innerWidth <= 720) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  };
+
+  useEffect(() => {
+    checkMobile();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
-    <div className={styles.homePageContainer}>
+    <Container>
       <Head>
         <title>Home | Podcastr</title>
       </Head>
-      <section className={styles.latestEpisodes}>
+      <LatestEpisodes>
         <h2>Últimos lançamentos</h2>
         <ul>
           {latestEpisodes.map((episode, index) => (
@@ -45,33 +64,46 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             />
           ))}
         </ul>
-      </section>
-      <section className={styles.allEpisodes}>
+      </LatestEpisodes>
+      <AllEpisodes>
         <h2>Todos episódios</h2>
-        <table cellSpacing={0}>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Podcast</th>
-              <th>Integrantes</th>
-              <th>Data</th>
-              <th>Duração</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
+        {!mobile ? (
+          <table cellSpacing={0}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Podcast</th>
+                <th>Integrantes</th>
+                <th>Data</th>
+                <th>Duração</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {allEpisodes.map((episode, index) => (
+                <EpisodeItem
+                  key={episode.id}
+                  episode={episode}
+                  index={index + latestEpisodes.length}
+                  episodeList={episodeList}
+                />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <>
             {allEpisodes.map((episode, index) => (
-              <EpisodeItem
+              <LatestEpisodeItem
                 key={episode.id}
                 episode={episode}
                 index={index + latestEpisodes.length}
                 episodeList={episodeList}
               />
             ))}
-          </tbody>
-        </table>
-      </section>
-    </div>
+          </>
+        )}
+      </AllEpisodes>
+    </Container>
   );
 }
 

@@ -1,7 +1,16 @@
 .appContainer {
   display: flex;
-
+  height: 100vh;
+  
   main {
     flex: 1;
+  }
+}
+
+@media (max-width: 720px) {
+  .appContainer {
+    position: relative;
+    overflow-y: scroll; 
+    overflow-x: hidden;
   }
 }

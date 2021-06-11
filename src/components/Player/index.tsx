@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { usePlayerContext } from "../../contexts/PlayerContext";
 import Image from "next/image";
-import styles from "./styles.module.scss";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { FiRepeat } from "react-icons/fi";
 import { BsShuffle } from "react-icons/bs";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
+import {
+  Container,
+  Buttons,
+  CurrentEpisode,
+  EmptyPlayer,
+  Progress,
+} from "./styles";
 
 interface EpisodeProps {
   thumbnail: string;
@@ -35,6 +41,16 @@ export function Player() {
   } = usePlayerContext();
   const [disabled, setDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [mobile, setMobile] = useState(true);
+
+  const checkMobile = () => {
+    if (window.innerWidth <= 720) {
+      setMobile(true);
+    } else {
+      setMobile(false);
+    }
+  };
+
   const episode = episodeList[currentEpisodeIndex];
 
   const setupProgressListener = () => {
@@ -66,6 +82,7 @@ export function Player() {
     } else {
       setDisabled(true);
     }
+    checkMobile();
   }, []);
 
   useEffect(() => {
@@ -88,34 +105,52 @@ export function Player() {
     }
   }, [isPlaying]);
 
+  useEffect(() => {
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <div className={styles.playerContainer}>
+    <Container>
       <header>
         <img src="/playing.svg" alt="Tocando agora" />
-        <strong>Tocando agora</strong>
+        {!mobile ? (
+          <strong>Tocando agora</strong>
+        ) : (
+          <>
+            {
+              <strong style={{ maxWidth: "90%" }}>
+                {episode ? episode.title : "Tocando agora"}
+              </strong>
+            }
+          </>
+        )}
       </header>
-
-      {episode ? (
-        <div className={styles.currentEpisode}>
-          <Image
-            width={592}
-            height={592}
-            src={episode.thumbnail}
-            objectFit="cover"
-          />
-          <strong>{episode.title}</strong>
-          <span>{episode.members}</span>
-        </div>
-      ) : (
-        <div className={styles.emptyPlayer}>
-          <strong>Selecione um podcast para ouvir</strong>
-        </div>
+      {!mobile && (
+        <>
+          {episode ? (
+            <CurrentEpisode>
+              <Image
+                width={592}
+                height={592}
+                src={episode.thumbnail}
+                objectFit="cover"
+              />
+              <strong>{episode.title}</strong>
+              <span>{episode.members}</span>
+            </CurrentEpisode>
+          ) : (
+            <EmptyPlayer>
+              <strong>Selecione um podcast para ouvir</strong>
+            </EmptyPlayer>
+          )}
+        </>
       )}
 
-      <footer className={!episode ? styles.empty : ""}>
-        <div className={styles.progress}>
+      <footer className={!episode ? "empty" : ""}>
+        <Progress>
           <span>{convertDurationToTimeString(progress)}</span>
-          <div className={styles.slider}>
+          <div className="slider">
             {episode ? (
               <Slider
                 max={episode.duration}
@@ -126,11 +161,11 @@ export function Player() {
                 handleStyle={{ borderColor: "#04D361", borderWidth: 4 }}
               />
             ) : (
-              <div className={styles.emptySlider} />
+              <div className="emptySlider" />
             )}
           </div>
           <span>{episode ? episode.durationAsString : "00:00:00"}</span>
-        </div>
+        </Progress>
 
         {episode && (
           <audio
@@ -143,7 +178,7 @@ export function Player() {
           />
         )}
 
-        <div className={styles.buttons}>
+        <Buttons>
           <button
             type="button"
             onClick={toggleShuffle}
@@ -164,7 +199,7 @@ export function Player() {
           <button
             type="button"
             disabled={disabled}
-            className={styles.playButton}
+            className="playButton"
             onClick={togglePlay}
           >
             {isPlaying ? (
@@ -186,8 +221,8 @@ export function Player() {
               style={{ width: 20, height: 20 }}
             />
           </button>
-        </div>
+        </Buttons>
       </footer>
-    </div>
+    </Container>
   );
 }

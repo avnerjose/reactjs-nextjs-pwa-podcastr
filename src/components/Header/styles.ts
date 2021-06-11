@@ -1,4 +1,6 @@
-.headerContainer {
+import styled from "styled-components";
+
+export const Container = styled.header`
   background: var(--white);
   height: 6.5rem;
   display: flex;
@@ -16,8 +18,18 @@
     border-left: 1px solid var(--gray-100);
   }
 
-  span{
-      margin-left: auto;
-      text-transform: capitalize;   
+  span {
+    margin-left: auto;
+    text-transform: capitalize;
   }
-}
+
+  @media (max-width: 720px) {
+    & {
+      width: 100vw;
+      padding: 1rem;
+      img {
+        width: 10rem;
+      }
+    }
+  }
+`;

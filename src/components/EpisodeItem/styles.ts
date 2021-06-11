@@ -1,4 +1,6 @@
-.container {
+import styled from "styled-components";
+
+export const Container = styled.tr`
   td {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--gray-100);
@@ -42,4 +44,4 @@
       }
     }
   }
-}
+`;

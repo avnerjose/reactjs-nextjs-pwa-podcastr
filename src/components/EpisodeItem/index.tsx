@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePlayerContext } from "../../contexts/PlayerContext";
-import styles from "./styles.module.scss";
+import { Container } from "./styles";
 
 interface EpisodeProps {
   id: string;
@@ -23,7 +23,7 @@ interface EpisodeItemProps {
 export function EpisodeItem({ index, episode, episodeList }: EpisodeItemProps) {
   const { handlePlayList } = usePlayerContext();
   return (
-    <tr className={styles.container}>
+    <Container>
       <td style={{ width: 72 }}>
         <Image
           width={120}
@@ -49,6 +49,6 @@ export function EpisodeItem({ index, episode, episodeList }: EpisodeItemProps) {
           <img src="/play-green.svg" alt="Tocar episódio" />
         </button>
       </td>
-    </tr>
+    </Container>
   );
 }

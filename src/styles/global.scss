@@ -19,26 +19,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  scrollbar-color: var(--purple-500) var(--gray-50);
-  scrollbar-width: 1rem;
+}
 
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 4px; 
-  }
-
-  ::-webkit-scrollbar-track {
-    background: var(--gray-50); 
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--purple-500); 
-
-  }
+main {
+  height: 100%;
 }
 
 body {
+  height: 100%;
+  width: 100%;
   background-color: var(--gray-50);
+}
+
+html {
+  height: 100%;
+  position: relative;
 }
 
 body,

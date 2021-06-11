@@ -6,8 +6,13 @@ import Link from "next/link";
 import format from "date-fns/format";
 import ptBr from "date-fns/locale/pt-BR";
 import { convertDurationToTimeString } from "../../utils/convertDurationToTimeString";
-import styles from "./episode.module.scss";
 import { usePlayerContext } from "../../contexts/PlayerContext";
+import {
+  Container,
+  Content,
+  Description,
+  ThumbnailContainer,
+} from "../../styles/pages/episode";
 
 interface EpisodeProps {
   id: string;
@@ -29,12 +34,12 @@ interface EpisodePageProps {
 export default function Episode({ episode }: EpisodePageProps) {
   const { handlePlay } = usePlayerContext();
   return (
-    <div className={styles.episodeContainer}>
+    <Container>
       <Head>
         <title>{episode.title} | Podcastr</title>
       </Head>
-      <div className={styles.container}>
-        <div className={styles.thumbnailContainer}>
+      <Content>
+        <ThumbnailContainer>
           <Link href="/">
             <button type="button">
               <img src="/arrow-left.svg" alt="Voltar" />
@@ -49,7 +54,7 @@ export default function Episode({ episode }: EpisodePageProps) {
           <button type="button" onClick={() => handlePlay(episode)}>
             <img src="/play.svg" alt="Tocar episódio" />
           </button>
-        </div>
+        </ThumbnailContainer>
         <header>
           <h1>{episode.title}</h1>
           <span>{episode.members}</span>
@@ -57,12 +62,11 @@ export default function Episode({ episode }: EpisodePageProps) {
           <span>{episode.durationAsString}</span>
         </header>
 
-        <div
-          className={styles.description}
+        <Description
           dangerouslySetInnerHTML={{ __html: episode.description }}
         />
-      </div>
-    </div>
+      </Content>
+    </Container>
   );
 }
 

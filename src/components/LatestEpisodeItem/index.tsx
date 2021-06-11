@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePlayerContext } from "../../contexts/PlayerContext";
-import styles from "./styles.module.scss";
+import { Container, EpisodeDetails } from "./styles";
 
 interface EpisodeProps {
   id: string;
@@ -27,7 +27,7 @@ export function LatestEpisodeItem({
 }: LatestEpisodeItemProps) {
   const { handlePlayList } = usePlayerContext();
   return (
-    <li className={styles.container}>
+    <Container>
       <Image
         width={192}
         height={192}
@@ -36,18 +36,18 @@ export function LatestEpisodeItem({
         objectFit="cover"
       />
 
-      <div className={styles.episodeDetails}>
+      <EpisodeDetails>
         <Link href={`/episode/${episode.id}`} passHref>
           <a>{episode.title}</a>
         </Link>
         <p>{episode.members}</p>
         <span>{episode.publishedAt}</span>
         <span>{episode.durationAsString}</span>
-      </div>
+      </EpisodeDetails>
 
       <button type="button" onClick={() => handlePlayList(episodeList, index)}>
         <img src="/play-green.svg" alt="Tocar episódio" />
       </button>
-    </li>
+    </Container>
   );
 }

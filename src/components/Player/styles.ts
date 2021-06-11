@@ -1,4 +1,6 @@
-.playerContainer {
+import styled from "styled-components";
+
+export const Container = styled.div`
   padding: 3rem 4rem;
   width: 26.5rem;
   height: 100vh;
@@ -26,15 +28,25 @@
       opacity: 0.5;
     }
   }
-}
 
-.currentEpisode {
+  @media(max-width: 720px){
+      &{
+          position: absolute;
+          padding: 1rem 3rem;
+          width: 100vw;
+          height: 12rem;
+          top: 6.5rem;
+      }
+  }
+`;
+
+export const CurrentEpisode = styled.div`
   text-align: center;
 
   img {
     border-radius: 1.5rem;
-    width: 14rem;
-    height: 14rem;
+    width: 18rem;
+    height: 10rem;
     margin-top: 1rem;
   }
 
@@ -54,9 +66,9 @@
     opacity: 0.6;
     line-height: 1.5rem;
   }
-}
+`;
 
-.emptyPlayer {
+export const EmptyPlayer = styled.div`
   width: 100%;
   height: 20rem;
   border: 1.5px dashed var(--purple-300);
@@ -71,9 +83,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
+`;
 
-.progress {
+export const Progress = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -87,7 +99,6 @@
 
   .slider {
     flex: 1;
-
     .emptySlider {
       width: 100%;
       height: 4px;
@@ -95,9 +106,9 @@
       border-radius: 2px;
     }
   }
-}
+`;
 
-.buttons {
+export const Buttons = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,7 +125,6 @@
       filter: brightness(0.7);
     }
 
-
     &.playButton {
       width: 4rem;
       height: 4rem;
@@ -130,4 +140,10 @@
       opacity: 0.5;
     }
   }
-}
+
+  @media(max-width: 720px){ 
+      &{
+          margin-top: 1rem;
+      }
+  }
+`;

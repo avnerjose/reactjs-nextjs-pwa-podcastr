@@ -1,16 +1,21 @@
 <h1 align="center">
   <img src="public/logo.svg" width="40%"/> 
 </h1>
-
+<h1 align="center" widht="50%">
+  <img alt="React" width="7%" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/react/react.png" />
+  <img alt="TypeScript" width="7%" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" />
+  <img alt="Nexjs" width="7%" src="https://assets.vercel.com/image/upload/v1607554385/repositories/next-js/next-logo.png" />
+  <img alt="TypeScript" width="7%" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/styled-components/styled-components.png" />
+</h1>
 <img src="public/podcastr.gif" /> 
 
 This project was developed during the fifth edition of the online event called [NextLeveLWeek](https://nextlevelweek.com) ministred by [RocketSeat](https://github.com/Rocketseat)
 
 ## ⚡️ The Project
-  The Podcastr project is a platform where people can listen to their favorite podcasts. 
+  The Podcastr project is a platform where people can listen to the FalaDev podcast. 
   
 ## 🎯 Features
- - Dinamic lists based on FAKE API data
+ - Lists based on FAKE API data
  - API Conection via AXIOS
  - Static Site Generation
  - Light and Dark theme
@@ -31,7 +36,7 @@ This project was developed during the fifth edition of the online event called [
 1. Clone this repository: 
 
 ```bash
-git clone https://github.com/avnerjose/react-native-nlw-5-plantmanager.git
+git clone https://github.com/avnerjose/reactjs-nextjs-pwa-podcastr
 ```
 2. Go to the folder you cloned the repository and install all dependencies
 
